@@ -34,7 +34,7 @@ export default function ComingSoon() {
         </p>
 
         <div className="dimension" role="img" aria-label="Coming soon">
-          <span className="dimension__label">COMING SOON</span>
+          <span className="dimension__label">COMING SOON...</span>
         </div>
 
         <div className="meter" aria-hidden="true">
