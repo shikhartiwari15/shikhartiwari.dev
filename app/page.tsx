@@ -1,13 +1,9 @@
 export default function ComingSoon() {
   // Rendered at build time (static export) — doubles as a "last revised" date on the title block.
   const revisedOn = new Date()
-    .toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    })
+    .toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
     .toUpperCase()
-    .replace(/ /g, ".");
+    .replace(/ /g, '.');
 
   return (
     <main className="sheet">
@@ -20,8 +16,7 @@ export default function ComingSoon() {
       <header className="statusbar">
         <span>PROJECT / PORTFOLIO_V1</span>
         <span>
-          STATUS / IN_PROGRESS
-          <span className="cursor" aria-hidden="true" />
+          STATUS / IN_PROGRESS<span className="cursor" aria-hidden="true" />
         </span>
       </header>
 
@@ -29,12 +24,10 @@ export default function ComingSoon() {
         <p className="eyebrow">// SITE SCHEMATIC — SHEET 1 OF 1</p>
 
         <h1 className="name">SHIKHAR</h1>
-        <p className="role">
-          AI/ML ENGINEER — EMBEDDED SYSTEMS &amp; COMPUTER VISION
-        </p>
+        <p className="role">AI/ML ENGINEER — EMBEDDED SYSTEMS &amp; COMPUTER VISION</p>
 
         <div className="dimension" role="img" aria-label="Coming soon">
-          <span className="dimension__label">COMING SOON...</span>
+          <span className="dimension__label">COMING SOON</span>
         </div>
 
         <div className="meter" aria-hidden="true">
@@ -48,12 +41,12 @@ export default function ComingSoon() {
         </div>
 
         {/* EDIT_ME: swap in a real address before you deploy */}
-        <a className="contact" href="mailto:contact@shikhartiwari.dev">
+        <a className="contact" href="mailto:you@yourdomain.com">
           <span className="contact__arrow" aria-hidden="true">
             →
           </span>
           GET IN TOUCH
-          <span className="contact__value">contact@shikhartiwari.dev</span>
+          <span className="contact__value">you@yourdomain.com</span>
         </a>
       </section>
 

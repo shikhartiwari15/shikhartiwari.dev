@@ -31,17 +31,28 @@ npm run build      # outputs static files to /out
 `next.config.js` is set to `output: 'export'`, so `npm run build` produces a
 fully static `/out` folder — no Node server required at runtime.
 
-## Deploy to Cloudflare Pages
+## Deploy to Cloudflare Workers
 
 1. Push this project to a GitHub repo.
-2. In the Cloudflare dashboard: **Workers & Pages → Create → Pages → Connect to Git**,
+2. In the Cloudflare dashboard: **Compute → Workers & Pages → Create → Import a repository**,
    and select the repo.
 3. Build settings:
    - **Build command:** `npm run build`
-   - **Build output directory:** `out`
-4. Deploy. Once it's live on `*.pages.dev`, go to your Pages project →
-   **Custom domains → Set up a domain** and attach your domain (Cloudflare
-   auto-configures DNS since the domain is already in your Cloudflare account).
+   - **Deploy command:** `npx wrangler deploy`
+4. Deploy, then attach your domain from the Worker's **Domains** tab.
+
+### Why `wrangler.jsonc` is here
+
+Without a `wrangler.jsonc` in the repo, `wrangler deploy` auto-detects Next.js
+as a dependency and assumes you want full SSR — it tries to install the
+OpenNext adapter and build a `.next/standalone` server bundle. That fails here
+because this project uses `output: 'export'` (a plain static site), which
+never produces that server bundle.
+
+`wrangler.jsonc` heads that off by explicitly telling Wrangler this is a
+static-assets deploy (`assets.directory: "./out"`), so it skips OpenNext
+entirely and just uploads the static files from `next build`. Keep this file —
+deleting it will bring the auto-detection (and the build failure) back.
 
 ## Structure
 
