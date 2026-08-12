@@ -436,7 +436,7 @@ export default function Home() {
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
               <a
-                href="https://github.com/shikhertiwari"
+                href="https://github.com/shikhartiwari15"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
