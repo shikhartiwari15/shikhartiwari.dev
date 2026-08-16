@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     "AI Engineer",
     "Predictive Maintenance",
   ],
+  alternates: { canonical: "https://shikhartiwari.dev" },
   openGraph: {
     title: "Shikhar Tiwari — AI & Industrial Automation Engineer",
     description:
@@ -54,17 +55,39 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// Structured data — helps recruiters/search understand who you are.
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Shikhar Tiwari",
+  jobTitle: "AI & Industrial Automation Engineer",
+  url: "https://shikhartiwari.dev",
+  address: { "@type": "PostalAddress", addressLocality: "Bengaluru", addressCountry: "IN" },
+  knowsAbout: [
+    "Industry 4.0",
+    "Industrial IoT",
+    "MES",
+    "SCADA",
+    "PLC",
+    "Predictive Maintenance",
+    "Machine Learning",
+  ],
+  sameAs: [
+    "https://www.linkedin.com/in/shikhartiwari15",
+    "https://github.com/shikhartiwari15",
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
-    >
-      <body className="bg-base font-sans text-ink antialiased">{children}</body>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+      <body className="bg-base font-sans text-ink antialiased">
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+      </body>
     </html>
   );
 }

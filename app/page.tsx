@@ -4,6 +4,7 @@ import {
   Github,
   Linkedin,
   MapPin,
+  FileDown,
   Factory,
   Database,
   Server,
@@ -11,6 +12,13 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import Pipeline from "@/components/Pipeline";
+import Projects from "@/components/Projects";
+import ContactForm from "@/components/ContactForm";
+
+const EMAIL = "contact@shikhartiwari.dev";
+const LINKEDIN = "https://www.linkedin.com/in/shikhartiwari15";
+const GITHUB = "https://github.com/shikhartiwari15";
+const RESUME = "/Shikhar_Tiwari_Resume.pdf";
 
 const STATS = [
   { value: "10", unit: "yrs", label: "engineering" },
@@ -20,10 +28,10 @@ const STATS = [
 ];
 
 const NAV = [
+  { href: "#projects", label: "Projects" },
   { href: "#about", label: "About" },
   { href: "#stack", label: "Stack" },
   { href: "#work", label: "Experience" },
-  { href: "#focus", label: "Focus" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -58,26 +66,12 @@ const STACK = [
   {
     icon: Server,
     title: "Backend & Cloud",
-    items: [
-      "Node.js",
-      "Express",
-      "REST APIs",
-      "Microservices",
-      "AWS (EC2 · S3 · Lambda)",
-      "CI/CD",
-    ],
+    items: ["Node.js", "Express", "REST APIs", "Microservices", "AWS (EC2 · S3 · Lambda)", "CI/CD"],
   },
   {
     icon: Database,
     title: "Data & Interfaces",
-    items: [
-      "MongoDB",
-      "MySQL",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Real-time dashboards",
-    ],
+    items: ["MongoDB", "MySQL", "React", "Next.js", "TypeScript", "Real-time dashboards"],
   },
 ];
 
@@ -141,10 +135,7 @@ export default function Home() {
       {/* NAV */}
       <header className="sticky top-0 z-40 -mx-5 mb-2 border-b border-line/70 bg-base/80 px-5 backdrop-blur sm:-mx-8 sm:px-8">
         <nav className="flex h-14 items-center justify-between">
-          <a
-            href="#top"
-            className="font-display text-sm font-semibold tracking-widest text-ink"
-          >
+          <a href="#top" className="font-display text-sm font-semibold tracking-widest text-ink">
             ST<span className="text-amber">.</span>
           </a>
           <div className="hidden gap-7 md:flex">
@@ -159,22 +150,21 @@ export default function Home() {
             ))}
           </div>
           <a
-            href="#contact"
-            className="font-mono text-xs uppercase tracking-wider text-signal transition-colors hover:text-amber"
+            href={RESUME}
+            className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-signal transition-colors hover:text-amber"
           >
-            Get in touch
+            <FileDown className="h-3.5 w-3.5" /> Résumé
           </a>
         </nav>
       </header>
 
       {/* HERO */}
       <section id="top" className="relative pt-16 sm:pt-24">
-        <div className="grid-bg pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]" />
+        <div className="hero-glow pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px]" />
+        <div className="grid-bg pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px]" />
         <div className="flex items-center gap-2 font-mono text-xs">
           <span className="h-2 w-2 rounded-full bg-signal animate-led" />
-          <span className="uppercase tracking-wider text-signal">
-            available for work
-          </span>
+          <span className="uppercase tracking-wider text-signal">available for work</span>
           <span className="text-faint">·</span>
           <span className="flex items-center gap-1 text-muted">
             <MapPin className="h-3 w-3" /> Bengaluru, India
@@ -188,22 +178,27 @@ export default function Home() {
           AI &amp; Industrial Automation Engineer
         </p>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          I connect factory floors to intelligent systems. Ten years of software
-          engineering, now spent turning machines, sensors, and production lines
-          into real-time, data-driven operations — and building toward
-          industrial AI.
+          I connect factory floors to intelligent systems. Ten years of software engineering, now
+          spent turning machines, sensors, and production lines into real-time, data-driven
+          operations — and building toward industrial AI.
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
           <a
-            href="#work"
+            href="#projects"
             className="group inline-flex items-center gap-2 rounded-md bg-amber px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-base transition-transform hover:-translate-y-0.5"
           >
-            View the work
+            View projects
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
           <a
-            href="mailto:contact@shikhartiwari.dev"
+            href={RESUME}
+            className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
+          >
+            <FileDown className="h-4 w-4" /> Download résumé
+          </a>
+          <a
+            href={`mailto:${EMAIL}`}
             className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
           >
             <Mail className="h-4 w-4" /> Contact
@@ -213,11 +208,9 @@ export default function Home() {
         {/* STATS */}
         <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-4">
           {STATS.map((s) => (
-            <div key={s.label} className="bg-panel p-4">
+            <div key={s.label} className="glass p-4">
               <div className="flex items-baseline gap-1">
-                <span className="font-display text-3xl font-bold text-ink">
-                  {s.value}
-                </span>
+                <span className="font-display text-3xl font-bold text-ink">{s.value}</span>
                 <span className="font-mono text-xs text-amber">{s.unit}</span>
               </div>
               <div className="mt-1 font-mono text-[11px] uppercase tracking-wide text-muted">
@@ -233,11 +226,25 @@ export default function Home() {
         <Reveal>
           <Eyebrow>system architecture</Eyebrow>
           <p className="mb-8 max-w-2xl text-sm leading-relaxed text-muted">
-            The data path I build and operate — from the machine on the floor to
-            the business systems above it. Each layer is live; industrial AI is
-            the layer I&apos;m commissioning next.
+            The data path I build and operate — from the machine on the floor to the business systems
+            above it. Each layer is live; industrial AI is the layer I&apos;m commissioning next.
+            Every project below is tagged to the layer it lives in.
           </p>
           <Pipeline />
+        </Reveal>
+      </section>
+
+      {/* PROJECTS — the work */}
+      <section id="projects" className="mt-28 scroll-mt-20">
+        <Reveal>
+          <Eyebrow>selected work</Eyebrow>
+          <p className="mb-8 max-w-2xl text-sm leading-relaxed text-muted">
+            Systems I&apos;ve commissioned across the OT/IT stack. Open any card for the problem,
+            approach, and result.
+          </p>
+        </Reveal>
+        <Reveal>
+          <Projects />
         </Reveal>
       </section>
 
@@ -248,52 +255,41 @@ export default function Home() {
           <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
             <div className="space-y-4 text-base leading-relaxed text-muted">
               <p>
-                I started as a full-stack engineer and spent a decade shipping
-                scalable, data-heavy applications. For the past few years my
-                work has moved onto the shop floor: integrating{" "}
-                <span className="text-ink">PLC and SCADA</span> systems,
-                building <span className="text-ink">IIoT pipelines</span>, and
-                developing the <span className="text-ink">MES</span> that
-                carries machine data up to the ERP.
+                I started as a full-stack engineer and spent a decade shipping scalable, data-heavy
+                applications. For the past few years my work has moved onto the shop floor:
+                integrating <span className="text-ink">PLC and SCADA</span> systems, building{" "}
+                <span className="text-ink">IIoT pipelines</span>, and developing the{" "}
+                <span className="text-ink">MES</span> that carries machine data up to the ERP.
               </p>
               <p>
-                That backend, data, and cloud foundation is exactly what
-                industrial AI runs on. I&apos;m now building in that direction —
-                predictive maintenance, digital twins, and anomaly detection on
-                the real telemetry my systems already produce.
+                That backend, data, and cloud foundation is exactly what industrial AI runs on.
+                I&apos;m now building in that direction — predictive maintenance, digital twins, and
+                anomaly detection on the real telemetry my systems already produce.
               </p>
               <p className="text-ink">
-                The goal: manufacturing systems that don&apos;t just report what
-                happened, but anticipate what&apos;s next.
+                The goal: manufacturing systems that don&apos;t just report what happened, but
+                anticipate what&apos;s next.
               </p>
             </div>
-            <div className="rounded-lg border border-line bg-panel p-5">
-              <div className="font-mono text-[11px] uppercase tracking-wider text-faint">
-                focus
-              </div>
-              <div className="mt-2 font-display text-sm text-ink">
-                OT ↔ IT ↔ AI
-              </div>
+            <div className="rounded-lg border border-line glass p-5 shadow-panel">
+              <div className="font-mono text-[11px] uppercase tracking-wider text-faint">focus</div>
+              <div className="mt-2 font-display text-sm text-ink">OT ↔ IT ↔ AI</div>
               <div className="mt-5 font-mono text-[11px] uppercase tracking-wider text-faint">
                 based in
               </div>
-              <div className="mt-2 font-display text-sm text-ink">
-                Bengaluru, India
-              </div>
+              <div className="mt-2 font-display text-sm text-ink">Bengaluru, India</div>
               <div className="mt-5 font-mono text-[11px] uppercase tracking-wider text-faint">
                 education
               </div>
               <div className="mt-2 space-y-1 text-sm text-muted">
                 <div>
-                  <span className="text-ink">MBA</span> · UP Technical
-                  University
+                  <span className="text-ink">MBA</span> · UP Technical University
                 </div>
                 <div>
                   <span className="text-ink">MCA</span> · RML Avadh University
                 </div>
                 <div>
-                  <span className="text-ink">BCA</span> · Dr. B.R. Ambedkar
-                  University
+                  <span className="text-ink">BCA</span> · Dr. B.R. Ambedkar University
                 </div>
               </div>
             </div>
@@ -311,7 +307,7 @@ export default function Home() {
               return (
                 <div
                   key={group.title}
-                  className="rounded-lg border border-line bg-panel p-5 transition-colors hover:border-line/80 hover:bg-panel2"
+                  className="rounded-lg border border-line glass p-5 shadow-panel transition-colors hover:border-line2"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -330,7 +326,7 @@ export default function Home() {
                     {group.items.map((item) => (
                       <span
                         key={item}
-                        className="rounded border border-line bg-base px-2.5 py-1 font-mono text-xs text-muted"
+                        className="rounded border border-line bg-base/60 px-2.5 py-1 font-mono text-xs text-muted"
                       >
                         {item}
                       </span>
@@ -351,11 +347,9 @@ export default function Home() {
         <div className="space-y-4">
           {WORK.map((job, i) => (
             <Reveal key={job.org} delay={i * 80}>
-              <div className="rounded-lg border border-line bg-panel p-6">
+              <div className="rounded-lg border border-line glass p-6 shadow-panel">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                  <h3 className="font-display text-lg font-semibold text-ink">
-                    {job.role}
-                  </h3>
+                  <h3 className="font-display text-lg font-semibold text-ink">{job.role}</h3>
                   <span className="font-mono text-xs uppercase tracking-wider text-amber">
                     {job.period}
                   </span>
@@ -365,10 +359,7 @@ export default function Home() {
                 </div>
                 <ul className="mt-4 space-y-2.5">
                   {job.points.map((p, j) => (
-                    <li
-                      key={j}
-                      className="flex gap-3 text-sm leading-relaxed text-muted"
-                    >
+                    <li key={j} className="flex gap-3 text-sm leading-relaxed text-muted">
                       <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-signal" />
                       {p}
                     </li>
@@ -386,22 +377,14 @@ export default function Home() {
           <Eyebrow>currently building</Eyebrow>
           <div className="grid gap-4 sm:grid-cols-2">
             {FOCUS.map((f) => (
-              <div
-                key={f.title}
-                className="group relative rounded-lg border border-line bg-panel p-5"
-              >
+              <div key={f.title} className="group relative rounded-lg border border-line glass p-5 shadow-panel">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display text-sm font-semibold text-ink">
-                    {f.title}
-                  </h3>
+                  <h3 className="font-display text-sm font-semibold text-ink">{f.title}</h3>
                   <span className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-amber">
-                    <span className="h-1.5 w-1.5 rounded-full bg-amber animate-led" />{" "}
-                    in progress
+                    <span className="h-1.5 w-1.5 rounded-full bg-amber animate-led" /> in progress
                   </span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {f.desc}
-                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -412,34 +395,41 @@ export default function Home() {
       <section id="contact" className="mt-28 scroll-mt-20">
         <Reveal>
           <Eyebrow>contact</Eyebrow>
-          <div className="rounded-lg border border-line bg-panel p-8 text-center sm:p-12">
-            <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-              Let&apos;s build the intelligent factory.
-            </h2>
-            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
-              Open to roles and collaborations in industrial AI, IIoT, and
-              Industry 4.0. The fastest way to reach me is email.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <div className="rounded-lg border border-line glass p-8 shadow-panel sm:p-10">
+            <div className="mx-auto max-w-xl text-center">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                Let&apos;s build the intelligent factory.
+              </h2>
+              <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
+                Open to roles and collaborations in industrial AI, IIoT, and Industry 4.0. Send a
+                message below, or reach me directly.
+              </p>
+            </div>
+
+            <div className="mx-auto mt-8 max-w-xl">
+              <ContactForm />
+            </div>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 border-t border-line pt-6">
               <a
-                href="mailto:contact@shikhartiwari.dev"
-                className="inline-flex items-center gap-2 rounded-md bg-amber px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-base transition-transform hover:-translate-y-0.5"
+                href={`mailto:${EMAIL}`}
+                className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
               >
-                <Mail className="h-4 w-4" /> contact@shikhartiwari.dev
+                <Mail className="h-4 w-4" /> {EMAIL}
               </a>
               <a
-                href="https://linkedin.com/in/shikhertiwari"
+                href={LINKEDIN}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
+                className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
               >
                 <Linkedin className="h-4 w-4" /> LinkedIn
               </a>
               <a
-                href="https://github.com/shikhartiwari15"
+                href={GITHUB}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
+                className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
               >
                 <Github className="h-4 w-4" /> GitHub
               </a>
@@ -452,12 +442,9 @@ export default function Home() {
       <footer className="mt-24 border-t border-line py-8">
         <div className="flex flex-col items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-wider text-faint sm:flex-row">
           <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-signal animate-led" />{" "}
-            all systems operational
+            <span className="h-1.5 w-1.5 rounded-full bg-signal animate-led" /> all systems operational
           </span>
-          <span>
-            © {new Date().getFullYear()} Shikhar Tiwari · built with Next.js
-          </span>
+          <span>© {new Date().getFullYear()} Shikhar Tiwari · built with Next.js</span>
         </div>
       </footer>
     </main>

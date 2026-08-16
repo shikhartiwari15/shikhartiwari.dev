@@ -7,9 +7,10 @@ html {
 }
 
 body {
-  background-color: #0A0F16;
-  color: #E7EDF4;
+  background-color: #070A0F;
+  color: #EAF0F7;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* Blueprint grid backdrop */
@@ -18,8 +19,22 @@ body {
     linear-gradient(to right, rgba(30, 42, 56, 0.35) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(30, 42, 56, 0.35) 1px, transparent 1px);
   background-size: 46px 46px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 35%, transparent 100%);
+}
+
+/* Ambient hero glow — subtle, single source */
+.hero-glow {
+  background:
+    radial-gradient(600px 320px at 20% 0%, rgba(240, 169, 59, 0.10), transparent 60%),
+    radial-gradient(700px 360px at 85% 10%, rgba(52, 211, 153, 0.08), transparent 60%);
+}
+
+/* Glass panel — matured glassmorphism, used with restraint */
+.glass {
+  background: linear-gradient(180deg, rgba(19, 29, 40, 0.72), rgba(14, 20, 28, 0.72));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* Scroll reveal */
@@ -28,6 +43,7 @@ body {
   transform: translateY(18px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
@@ -39,9 +55,9 @@ body {
   background-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(52, 211, 153, 0.15) 20%,
+    rgba(52, 211, 153, 0.12) 20%,
     #34d399 50%,
-    rgba(52, 211, 153, 0.15) 80%,
+    rgba(52, 211, 153, 0.12) 80%,
     transparent 100%
   );
   background-size: 200% 100%;
@@ -50,17 +66,30 @@ body {
   background-image: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(52, 211, 153, 0.15) 20%,
+    rgba(52, 211, 153, 0.12) 20%,
     #34d399 50%,
-    rgba(52, 211, 153, 0.15) 80%,
+    rgba(52, 211, 153, 0.12) 80%,
     transparent 100%
   );
   background-size: 100% 200%;
 }
 
+/* Radar sweep for the "commissioning" projects */
+.sweep-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 50%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 50%, transparent);
+}
+
 ::selection {
   background: rgba(240, 169, 59, 0.28);
   color: #fff;
+}
+
+/* Visible keyboard focus */
+:focus-visible {
+  outline: 2px solid #34d399;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {

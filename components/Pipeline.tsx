@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Cpu,
-  Radio,
-  Boxes,
-  Cloud,
-  BrainCircuit,
-  type LucideIcon,
-} from "lucide-react";
+import { Cpu, Radio, Boxes, Cloud, BrainCircuit, type LucideIcon } from "lucide-react";
 
 type NodeStatus = "online" | "commissioning";
 
@@ -28,16 +21,16 @@ const NODES: FlowNode[] = [
 ];
 
 function StatusDot({ status }: { status: NodeStatus }) {
-  const color = status === "online" ? "bg-signal" : "bg-amber";
+  const online = status === "online";
   return (
     <span className="inline-flex items-center gap-1.5">
-      <span className={`h-1.5 w-1.5 rounded-full ${color} animate-led`} />
+      <span className={`h-1.5 w-1.5 rounded-full ${online ? "bg-signal" : "bg-amber"} animate-led`} />
       <span
         className={`font-mono text-[10px] uppercase tracking-wider ${
-          status === "online" ? "text-signal" : "text-amber"
+          online ? "text-signal" : "text-amber"
         }`}
       >
-        {status === "online" ? "online" : "commissioning"}
+        {online ? "online" : "commissioning"}
       </span>
     </span>
   );
@@ -48,21 +41,23 @@ function Node({ node }: { node: FlowNode }) {
   const active = node.status === "commissioning";
   return (
     <div
-      className={`group relative flex-1 rounded-lg border bg-panel p-4 transition-colors ${
+      className={`group relative flex-1 overflow-hidden rounded-lg border glass p-4 shadow-panel transition-colors ${
         active ? "border-amber/40" : "border-line hover:border-signal/40"
       }`}
     >
-      <div className="flex items-center justify-between">
-        <Icon
-          className={`h-5 w-5 ${active ? "text-amber" : "text-signal"}`}
-          strokeWidth={1.5}
-        />
+      {active && (
+        <div className="sweep-mask pointer-events-none absolute inset-0">
+          <div className="animate-sweep h-full w-1/3 bg-gradient-to-r from-transparent via-amber/15 to-transparent" />
+        </div>
+      )}
+      <div className="relative flex items-center justify-between">
+        <Icon className={`h-5 w-5 ${active ? "text-amber" : "text-signal"}`} strokeWidth={1.5} />
         <StatusDot status={node.status} />
       </div>
-      <div className="mt-3 font-display text-sm font-semibold tracking-wide text-ink">
+      <div className="relative mt-3 font-display text-sm font-semibold tracking-wide text-ink">
         {node.label}
       </div>
-      <div className="mt-0.5 font-mono text-[11px] text-muted">{node.sub}</div>
+      <div className="relative mt-0.5 font-mono text-[11px] text-muted">{node.sub}</div>
     </div>
   );
 }

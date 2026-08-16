@@ -1,8 +1,8 @@
 # shikhartiwari.dev
 
-Personal portfolio for Shikhar Tiwari — AI &amp; Industrial Automation Engineer.
-Built with Next.js 14 (App Router), TypeScript, and Tailwind CSS. Configured as
-a static export, so it deploys anywhere that serves static files.
+Personal portfolio — **AI & Industrial Automation Engineer**. Industrial HMI/SCADA
+control-panel aesthetic. Next.js 14 (static export) + Tailwind CSS + TypeScript,
+deployed on Cloudflare Pages.
 
 ## Run locally
 
@@ -11,35 +11,49 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-## Build
+## Build (static export → ./out)
 
 ```bash
-npm run build      # outputs a static site to ./out
+npm run build      # outputs a fully static site to ./out
 ```
 
-## Deploy to Cloudflare Pages (recommended — your domain already lives at Cloudflare)
+`next.config.mjs` sets `output: "export"`, so `./out` is a static site you can
+deploy anywhere. No server required.
 
-1. Push this folder to a new GitHub repo.
-2. Cloudflare dashboard → **Workers &amp; Pages** → **Create** → **Pages** → **Connect to Git**.
-3. Pick the repo. Set:
-   - **Framework preset:** Next.js (Static HTML Export)
-   - **Build command:** `npm run build`
-   - **Build output directory:** `out`
-4. **Save and Deploy.** You'll get a `*.pages.dev` URL to preview.
-5. In the Pages project → **Custom domains** → **Set up a domain** → enter
-   `shikhartiwari.dev`. Because the domain is already in your Cloudflare
-   account, the DNS record is added automatically. Add `www` too if you want.
+## Deploy to Cloudflare Pages
 
-HTTPS is issued automatically — required for `.dev`, handled for you.
+Connect the GitHub repo in the Cloudflare Pages dashboard and set:
 
-## Deploy to Vercel (alternative)
+- **Build command:** `npm run build`
+- **Build output directory:** `out`
+- **Framework preset:** Next.js (Static HTML Export)
 
-Import the repo at vercel.com — it auto-detects Next.js, no config needed.
-Then add `shikhartiwari.dev` under the project's **Domains** and follow the DNS
-instructions (a CNAME/A record you add in Cloudflare's DNS tab).
+Push to `main` → auto-deploy. Every pull request gets a free preview URL.
 
-## Editing content
+## Where to edit things
 
-All copy lives in `app/page.tsx` (stats, experience, skills, focus) and
-`components/Pipeline.tsx` (the data-flow diagram). Colors and fonts are in
-`tailwind.config.ts`.
+| What                | File                        |
+| ------------------- | --------------------------- |
+| **Projects**        | `lib/projects.ts`  ← edit this most |
+| Hero / sections     | `app/page.tsx`              |
+| Pipeline diagram    | `components/Pipeline.tsx`   |
+| Contact form        | `components/ContactForm.tsx`|
+| Colors / animation  | `tailwind.config.ts`, `app/globals.css` |
+| SEO / metadata      | `app/layout.tsx`            |
+| Résumé download     | `public/Shikhar_Tiwari_Resume.pdf` |
+
+## Contact form
+
+Uses [Web3Forms](https://web3forms.com) — no backend, no database.
+
+1. Get a free access key (250 submissions/month, no account needed).
+2. Paste it into `WEB3FORMS_ACCESS_KEY` in `components/ContactForm.tsx`.
+
+Submissions arrive in your inbox. Swap for Formspree / Static Forms / splitforms
+if you prefer — they use the same drop-in pattern.
+
+## Adding a project
+
+Open `lib/projects.ts` and add an entry to the `PROJECTS` array. Fill in `links`
+when you have real URLs (blank links simply don't render). Drop a screenshot in
+`public/` and set `image` to show it.
