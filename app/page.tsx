@@ -14,8 +14,12 @@ import Reveal from "@/components/Reveal";
 import Pipeline from "@/components/Pipeline";
 import Projects from "@/components/Projects";
 import ContactForm from "@/components/ContactForm";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const EMAIL = "contact@shikhartiwari.dev";
+// mailto with a display name so the recipient shows as "Shikhar Tiwari <…>".
+// @ is left literal for max client compatibility; the name/brackets are encoded.
+const MAILTO = `mailto:Shikhar%20Tiwari%20%3C${EMAIL}%3E`;
 const LINKEDIN = "https://www.linkedin.com/in/shikhartiwari15";
 const GITHUB = "https://github.com/shikhartiwari15";
 const RESUME = "/Shikhar_Tiwari_Resume.pdf";
@@ -135,8 +139,12 @@ export default function Home() {
       {/* NAV */}
       <header className="sticky top-0 z-40 -mx-5 mb-2 border-b border-line/70 bg-base/80 px-5 backdrop-blur sm:-mx-8 sm:px-8">
         <nav className="flex h-14 items-center justify-between">
-          <a href="#top" className="font-display text-sm font-semibold tracking-widest text-ink">
-            ST<span className="text-amber">.</span>
+          <a href="#top" className="flex items-center gap-2.5" aria-label="Shikhar Tiwari — home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/favicon.svg" alt="" width={30} height={30} className="rounded-[7px]" />
+            <span className="hidden font-display text-sm font-semibold tracking-wide text-ink sm:inline">
+              Shikhar Tiwari
+            </span>
           </a>
           <div className="hidden gap-7 md:flex">
             {NAV.map((n) => (
@@ -149,12 +157,15 @@ export default function Home() {
               </a>
             ))}
           </div>
-          <a
-            href={RESUME}
-            className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-signal transition-colors hover:text-amber"
-          >
-            <FileDown className="h-3.5 w-3.5" /> Résumé
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href={RESUME}
+              className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-signal transition-colors hover:text-amber"
+            >
+              <FileDown className="h-3.5 w-3.5" /> Résumé
+            </a>
+            <ThemeToggle />
+          </div>
         </nav>
       </header>
 
@@ -186,7 +197,7 @@ export default function Home() {
         <div className="mt-8 flex flex-wrap gap-3">
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2 rounded-md bg-amber px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-base transition-transform hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 rounded-md bg-amber px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-onAmber transition-transform hover:-translate-y-0.5"
           >
             View projects
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -198,7 +209,7 @@ export default function Home() {
             <FileDown className="h-4 w-4" /> Download résumé
           </a>
           <a
-            href={`mailto:${EMAIL}`}
+            href={MAILTO}
             className="inline-flex items-center gap-2 rounded-md border border-line px-5 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
           >
             <Mail className="h-4 w-4" /> Contact
@@ -412,7 +423,7 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3 border-t border-line pt-6">
               <a
-                href={`mailto:${EMAIL}`}
+                href={MAILTO}
                 className="inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:border-signal/50 hover:text-signal"
               >
                 <Mail className="h-4 w-4" /> {EMAIL}

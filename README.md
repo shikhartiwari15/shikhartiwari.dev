@@ -39,6 +39,9 @@ Push to `main` → auto-deploy. Every pull request gets a free preview URL.
 | Pipeline diagram    | `components/Pipeline.tsx`   |
 | Contact form        | `components/ContactForm.tsx`|
 | Colors / animation  | `tailwind.config.ts`, `app/globals.css` |
+| Light / dark palette | `app/globals.css` — edit the `:root` (dark) and `.light` blocks |
+| Fonts (Poppins + Plex Mono) | `app/layout.tsx` |
+| Theme toggle        | `components/ThemeToggle.tsx` |
 | SEO / metadata      | `app/layout.tsx`            |
 | Résumé download     | `public/Shikhar_Tiwari_Resume.pdf` |
 

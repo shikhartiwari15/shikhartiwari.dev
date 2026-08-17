@@ -1,0 +1,14 @@
+{
+  "name": "Shikhar Tiwari — AI & Industrial Automation Engineer",
+  "short_name": "Shikhar Tiwari",
+  "description": "Industry 4.0 · IIoT · MES · Industrial AI — connecting factory floors to intelligent systems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070A0F",
+  "theme_color": "#070A0F",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-maskable-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

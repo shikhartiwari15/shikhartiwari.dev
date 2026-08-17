@@ -108,7 +108,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={state === "sending"}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-amber px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-base transition-transform hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-60 sm:w-auto"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-amber px-5 py-3 font-mono text-xs font-semibold uppercase tracking-wider text-onAmber transition-transform hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-60 sm:w-auto"
       >
         {state === "sending" ? (
           <>

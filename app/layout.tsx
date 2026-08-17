@@ -1,18 +1,11 @@
-import type { Metadata } from "next";
-import { Chakra_Petch, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Poppins, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const display = Chakra_Petch({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-body",
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -39,6 +32,16 @@ export const metadata: Metadata = {
     "Predictive Maintenance",
   ],
   alternates: { canonical: "https://shikhartiwari.dev" },
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     title: "Shikhar Tiwari — AI & Industrial Automation Engineer",
     description:
@@ -46,16 +49,26 @@ export const metadata: Metadata = {
     url: "https://shikhartiwari.dev",
     siteName: "Shikhar Tiwari",
     type: "website",
+    images: [
+      { url: "/og-image.png", width: 1200, height: 630, alt: "Shikhar Tiwari — AI & Industrial Automation Engineer" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Shikhar Tiwari — AI & Industrial Automation Engineer",
     description:
       "Connecting factory floors to intelligent systems. Industry 4.0 · IIoT · MES · Industrial AI.",
+    images: ["/og-image.png"],
   },
 };
 
-// Structured data — helps recruiters/search understand who you are.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#070A0F" },
+    { media: "(prefers-color-scheme: light)", color: "#F0F3F7" },
+  ],
+};
+
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -72,16 +85,17 @@ const personSchema = {
     "Predictive Maintenance",
     "Machine Learning",
   ],
-  sameAs: [
-    "https://www.linkedin.com/in/shikhartiwari15",
-    "https://github.com/shikhartiwari15",
-  ],
+  sameAs: ["https://www.linkedin.com/in/shikhartiwari15", "https://github.com/shikhartiwari15"],
 };
+
+// Sets the theme class before paint to avoid a flash of the wrong theme.
+const themeInit = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}document.documentElement.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="bg-base font-sans text-ink antialiased">
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}
         <script
           type="application/ld+json"

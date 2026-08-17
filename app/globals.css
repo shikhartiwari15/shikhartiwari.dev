@@ -2,37 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   THEME TOKENS — colors are RGB channel triplets so Tailwind's
+   /opacity modifiers keep working (rgb(var(--x) / <alpha>)).
+   Dark is the default; .light overrides.
+   ============================================================ */
+:root {
+  --base: 7 10 15;
+  --panel: 14 20 28;
+  --panel2: 19 29 40;
+  --line: 30 42 56;
+  --line2: 38 55 74;
+  --ink: 234 240 247;
+  --muted: 138 154 171;
+  --faint: 84 99 111;
+  --amber: 240 169 59;
+  --signal: 52 211 153;
+  --on-amber: 10 15 22;      /* text on amber — dark in both themes */
+  --grid: 30 42 56;
+  --glass-a: 19 29 40;
+  --glass-b: 14 20 28;
+  --glass-alpha: 0.72;
+  --glow-amber: 0.10;
+  --glow-signal: 0.08;
+}
+
+.light {
+  --base: 240 243 247;
+  --panel: 255 255 255;
+  --panel2: 244 247 250;
+  --line: 220 227 235;
+  --line2: 198 210 222;
+  --ink: 11 21 32;
+  --muted: 78 90 102;
+  --faint: 140 152 166;
+  --amber: 168 99 10;        /* deeper amber — AA on light */
+  --signal: 10 125 89;       /* deeper green — AA on light */
+  --on-amber: 255 251 245;
+  --grid: 200 210 222;
+  --glass-a: 255 255 255;
+  --glass-b: 248 250 252;
+  --glass-alpha: 0.75;
+  --glow-amber: 0.14;
+  --glow-signal: 0.10;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #070A0F;
-  color: #EAF0F7;
+  background-color: rgb(var(--base));
+  color: rgb(var(--ink));
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Blueprint grid backdrop */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(30, 42, 56, 0.35) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(30, 42, 56, 0.35) 1px, transparent 1px);
+    linear-gradient(to right, rgb(var(--grid) / 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--grid) / 0.35) 1px, transparent 1px);
   background-size: 46px 46px;
   -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 35%, transparent 100%);
   mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 35%, transparent 100%);
 }
 
-/* Ambient hero glow — subtle, single source */
+/* Ambient hero glow */
 .hero-glow {
   background:
-    radial-gradient(600px 320px at 20% 0%, rgba(240, 169, 59, 0.10), transparent 60%),
-    radial-gradient(700px 360px at 85% 10%, rgba(52, 211, 153, 0.08), transparent 60%);
+    radial-gradient(600px 320px at 20% 0%, rgb(var(--amber) / var(--glow-amber)), transparent 60%),
+    radial-gradient(700px 360px at 85% 10%, rgb(var(--signal) / var(--glow-signal)), transparent 60%);
 }
 
-/* Glass panel — matured glassmorphism, used with restraint */
+/* Glass panel — matured glassmorphism */
 .glass {
-  background: linear-gradient(180deg, rgba(19, 29, 40, 0.72), rgba(14, 20, 28, 0.72));
+  background: linear-gradient(
+    180deg,
+    rgb(var(--glass-a) / var(--glass-alpha)),
+    rgb(var(--glass-b) / var(--glass-alpha))
+  );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -50,14 +100,14 @@ body {
   transform: translateY(0);
 }
 
-/* Flowing connector (data moving through the pipeline) */
+/* Flowing connector (data through the pipeline) */
 .flow-line-x {
   background-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(52, 211, 153, 0.12) 20%,
-    #34d399 50%,
-    rgba(52, 211, 153, 0.12) 80%,
+    rgb(var(--signal) / 0.12) 20%,
+    rgb(var(--signal)) 50%,
+    rgb(var(--signal) / 0.12) 80%,
     transparent 100%
   );
   background-size: 200% 100%;
@@ -66,28 +116,26 @@ body {
   background-image: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(52, 211, 153, 0.12) 20%,
-    #34d399 50%,
-    rgba(52, 211, 153, 0.12) 80%,
+    rgb(var(--signal) / 0.12) 20%,
+    rgb(var(--signal)) 50%,
+    rgb(var(--signal) / 0.12) 80%,
     transparent 100%
   );
   background-size: 100% 200%;
 }
 
-/* Radar sweep for the "commissioning" projects */
 .sweep-mask {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 50%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 50%, transparent);
 }
 
 ::selection {
-  background: rgba(240, 169, 59, 0.28);
-  color: #fff;
+  background: rgb(var(--amber) / 0.28);
+  color: rgb(var(--ink));
 }
 
-/* Visible keyboard focus */
 :focus-visible {
-  outline: 2px solid #34d399;
+  outline: 2px solid rgb(var(--signal));
   outline-offset: 2px;
   border-radius: 4px;
 }
