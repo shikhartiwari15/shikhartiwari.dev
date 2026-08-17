@@ -5,7 +5,7 @@ import { Send, Loader2, CheckCircle2, AlertTriangle } from "lucide-react";
 
 // 1. Get a free access key at https://web3forms.com (250 submissions/mo, no account, no card).
 // 2. Paste it below. Submissions arrive in your inbox — no backend, no database.
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_ACCESS_KEY = "597dc984-3e56-43e0-8870-247583482ade";
 
 type State = "idle" | "sending" | "sent" | "error";
 
@@ -40,8 +40,12 @@ export default function ContactForm() {
     return (
       <div className="flex flex-col items-center gap-3 rounded-lg border border-signal/30 bg-signal/5 p-8 text-center">
         <CheckCircle2 className="h-8 w-8 text-signal" strokeWidth={1.5} />
-        <p className="font-display text-base font-semibold text-ink">Message received.</p>
-        <p className="text-sm text-muted">Thanks — I&apos;ll get back to you shortly.</p>
+        <p className="font-display text-base font-semibold text-ink">
+          Message received.
+        </p>
+        <p className="text-sm text-muted">
+          Thanks — I&apos;ll get back to you shortly.
+        </p>
       </div>
     );
   }
@@ -101,7 +105,8 @@ export default function ContactForm() {
 
       {state === "error" && (
         <p className="flex items-center justify-center gap-2 font-mono text-xs text-amber">
-          <AlertTriangle className="h-4 w-4" /> Something went wrong — email me directly instead.
+          <AlertTriangle className="h-4 w-4" /> Something went wrong — email me
+          directly instead.
         </p>
       )}
 
